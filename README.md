@@ -13,8 +13,8 @@ First, clone the project and configure the environment.
 [**Python>=3.7.0**](https://www.python.org/), [**PyTorch>=1.7**](https://pytorch.org/get-started/locally/).
 
 ```bash
-git clone https://github.com/jspron/insulator-defect  # clone
-cd insulator-defect
+git clone https://github.com/LuYang-2023/ICMA2024.git  # clone
+cd ICMA2024
 pip install -r requirements.txt  # install
 ```
 </details>
