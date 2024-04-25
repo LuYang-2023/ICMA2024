@@ -22,12 +22,10 @@ pip install -r requirements.txt  # install
 <details open>
 <summary>Train</summary>
 
-The project uses yolov5s.pt as the pre-trained model, make sure to get it before you start training. 
-The dataset WI we used is placed in /root/datasets directory, so make sure the dataset directory is correct during training. 
-Then start the training with the following command:
+
 
 ```python
-python train.py --weights yolov5s.pt --cfg models/BS-yolov5s.yaml --data data/mydata.yaml
+python train.py --cfg models/IDD-yolov5.yaml --data data/mydata.yaml
 ```
 </details>
 
@@ -35,8 +33,6 @@ python train.py --weights yolov5s.pt --cfg models/BS-yolov5s.yaml --data data/my
 <details>
 <summary>Test</summary>
 
-We have provided the trained weights file described in the paper, best.pt. After setting up the deep 
-learning environment and preparing the WI dataset, the results can be reproduced using the following command:
 
 ```bash
 python val.py --data data/mydata.yaml --weights best.pt --task test
