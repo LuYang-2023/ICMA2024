@@ -1,9 +1,11 @@
 <div align="left">
 
 # <div align="center">IDD-YOLOv5: A Lightweight Insulator Defect Real-time Detection Algorithm</div>
-**Dear reviewers: The source code and pre-trained model weights will be available upon the acceptance of the paper. Feel free to raise your questions or difficulties in the implementation.**
 
-Paper ID 433641 has been submitted to IEEE ICMA 2024.
+## Introduction
+This is our PyTorch implementation of the paper "[`IDD-YOLOv5: A Lightweight Insulator Defect Real-time Detection Algorithm`](https://doi.org/10.1109/icma61710.2024.10632897)" published in ***2024 IEEE International Conference on Mechatronics and Automation (ICMA)***.
+
+
 ## <div align="left">Quick Start Examples</div>
 
 <details open>
