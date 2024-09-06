@@ -420,6 +420,7 @@ def parse_model(d, ch):
             nn.ConvTranspose2d,
             DWConvTranspose2d,
             C3x,
+            GSConv,
         }:
             c1, c2 = ch[f], args[0]
             if c2 != no:  # if not output
@@ -444,6 +445,9 @@ def parse_model(d, ch):
             c2 = ch[f] * args[0] ** 2
         elif m is Expand:
             c2 = ch[f] // args[0] ** 2
+        elif m is CARAFE:
+            c2 = ch[f]
+            args = [c2, *args]
         else:
             c2 = ch[f]
 
