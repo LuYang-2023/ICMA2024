@@ -1107,3 +1107,68 @@ class Classify(nn.Module):
         if isinstance(x, list):
             x = torch.cat(x, 1)
         return self.linear(self.drop(self.pool(self.conv(x)).flatten(1)))
+
+class GSConv(nn.Module):
+    # GSConv https://github.com/AlanLi1997/slim-neck-by-gsconv
+    def __init__(self, c1, c2, k=1, s=1, g=1, act=True):
+        super().__init__()
+        c_ = c2 // 2
+        self.cv1 = Conv(c1, c_, k, s, None, g, act)
+        self.cv2 = Conv(c_, c_, 5, 1, None, c_, act)
+
+    def forward(self, x):
+        x1 = self.cv1(x)
+        x2 = torch.cat((x1, self.cv2(x1)), 1)
+        # shuffle
+        # y = x2.reshape(x2.shape[0], 2, x2.shape[1] // 2, x2.shape[2], x2.shape[3])
+        # y = y.permute(0, 2, 1, 3, 4)
+        # return y.reshape(y.shape[0], -1, y.shape[3], y.shape[4])
+
+        b, n, h, w = x2.data.size()
+        b_n = b * n // 2
+        y = x2.reshape(b_n, 2, h * w)
+        y = y.permute(1, 0, 2)
+        y = y.reshape(2, -1, n // 2, h, w)
+
+        return torch.cat((y[0], y[1]), 1)
+    
+
+class CARAFE(nn.Module):
+    def __init__(self, c, k_enc=3, k_up=5, c_mid=64, scale=2):
+        """ The unofficial implementation of the CARAFE module.
+        The details are in "https://arxiv.org/abs/1905.02188".
+        Args:
+            c: The channel number of the input and the output.
+            c_mid: The channel number after compression.
+            scale: The expected upsample scale.
+            k_up: The size of the reassembly kernel.
+            k_enc: The kernel size of the encoder.
+        Returns:
+            X: The upsampled feature map.
+        """
+        super(CARAFE, self).__init__()
+        self.scale = scale
+
+        self.comp = Conv(c, c_mid)
+        self.enc = Conv(c_mid, (scale * k_up) ** 2, k=k_enc, act=False)
+        self.pix_shf = nn.PixelShuffle(scale)
+
+        self.upsmp = nn.Upsample(scale_factor=scale, mode='nearest')
+        self.unfold = nn.Unfold(kernel_size=k_up, dilation=scale,
+                                padding=k_up // 2 * scale)
+
+    def forward(self, X):
+        b, c, h, w = X.size()
+        h_, w_ = h * self.scale, w * self.scale
+
+        W = self.comp(X)  # b * m * h * w
+        W = self.enc(W)  # b * 100 * h * w
+        W = self.pix_shf(W)  # b * 25 * h_ * w_
+        W = torch.softmax(W, dim=1)  # b * 25 * h_ * w_
+
+        X = self.upsmp(X)  # b * c * h_ * w_
+        X = self.unfold(X)  # b * 25c * h_ * w_
+        X = X.view(b, c, -1, h_, w_)  # b * 25 * c * h_ * w_
+
+        X = torch.einsum('bkhw,bckhw->bchw', [W, X])  # b * c * h_ * w_
+        return X
