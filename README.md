@@ -30,7 +30,7 @@ pip install -r requirements.txt  # install
 
 
 ```python
-python train.py --cfg models/IDD-yolov5.yaml --data data/mydata.yaml
+python train.py --cfg models/IDD-yolov5.yaml --data data/insulator_detection.yaml
 ```
 </details>
 
