@@ -44,5 +44,23 @@ python val.py --data data/mydata.yaml --weights best.pt --task test
 ```
 </details>
 
-## <div align="left"> The dataset we built </div>
-The dataset will be published after acceptance of the paper.
+
+### Citation
+If you use this code or article in your research, please cite it using the following BibTeX entry:
+
+```bibtex
+@INPROCEEDINGS{10632897,
+  author={Lu, Yang and Li, Dahua and Gao, Qiang and Yu, Xiao and Li, Xuan and Bai, Zhongli},
+  booktitle={2024 IEEE International Conference on Mechatronics and Automation (ICMA)}, 
+  title={IDD-YOLOv5: A Lightweight Insulator Defect Real-time Detection Algorithm}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={491-495},
+  keywords={YOLO;Adaptation models;Accuracy;Power transmission lines;Insulators;Real-time systems;Neck;Defect detection;Insulator;Lightweight;Deep learning;YOLOv5},
+  doi={10.1109/ICMA61710.2024.10632897}}
+```
+
+
+## Author's Contact
+Email：yj20220275@stud.tjut.edu.cn
