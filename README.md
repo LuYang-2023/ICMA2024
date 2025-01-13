@@ -2,6 +2,13 @@
 
 # <div align="center">IDD-YOLOv5: A Lightweight Insulator Defect Real-time Detection Algorithm</div>
 
+## Dataset
+***I will first provide links to Baidu.com discs for some of the datasets. More specific datasets involve confidential information from Tianjin Grid, and I need to discuss with them whether they can be made public. However, the datasets I provided are sufficient for code debugging and model training. The links to the datasets are below:***
+
+**Link:** https://pan.baidu.com/s/1inULMZcnibOsfjXvJQiFjQ
+
+**Extraction code:** 8kdy
+
 ## Introduction
 This is our PyTorch implementation of the paper "[`IDD-YOLOv5: A Lightweight Insulator Defect Real-time Detection Algorithm`](https://doi.org/10.1109/icma61710.2024.10632897)" published in ***2024 IEEE International Conference on Mechatronics and Automation (ICMA)***.
 
@@ -43,13 +50,6 @@ python train.py --cfg models/IDD-yolov5.yaml --data data/insulator_detection.yam
 python val.py --data data/mydata.yaml --weights best.pt --task test
 ```
 </details>
-
-
-### Dataset
-
-Link: https://pan.baidu.com/s/1inULMZcnibOsfjXvJQiFjQ 
-
-Extraction code: 8kdy
 
 
 
