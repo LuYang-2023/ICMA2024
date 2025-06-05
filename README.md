@@ -9,6 +9,9 @@
 
 **Extraction code:** 8kdy
 
+**Google Drive download link：** https://drive.google.com/file/d/1QOFg5iCop9Jb9uAjiNelYvELOmUWGMs-/view?usp=drive_link
+
+
 ## Introduction
 This is our PyTorch implementation of the paper "[`IDD-YOLOv5: A Lightweight Insulator Defect Real-time Detection Algorithm`](https://doi.org/10.1109/icma61710.2024.10632897)" published in ***2024 IEEE International Conference on Mechatronics and Automation (ICMA)***.
 
